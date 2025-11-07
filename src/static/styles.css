@@ -85,14 +85,15 @@ section h3 {
 }
 
 .participants-list {
-  list-style: square;
-  padding-left: 20px;
+  /* hide default bullets and tighten spacing */
+  list-style: none;
+  padding-left: 0;
   margin: 0;
   max-height: 140px;
   overflow-y: auto;
   background: linear-gradient(180deg, rgba(250,250,255,0.9), rgba(245,245,255,0.9));
   border-radius: 4px;
-  padding: 10px 12px;
+  padding: 8px;
   border: 1px solid #eef2ff;
 }
 
@@ -100,6 +101,28 @@ section h3 {
   margin-bottom: 6px;
   font-size: 14px;
   color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* delete button next to each participant */
+.participant-item .delete-btn {
+  background: transparent;
+  border: none;
+  color: #c62828;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+.participant-item .delete-btn:hover {
+  background: rgba(198,40,40,0.08);
+}
+.participant-item .email-label {
+  word-break: break-all;
+  flex: 1 1 auto;
 }
 
 /* softer, smaller text when there are no participants yet */
