@@ -15,17 +15,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
+        // build activity card
         const activityCard = document.createElement("div");
         activityCard.className = "activity-card";
 
         const spotsLeft = details.max_participants - details.participants.length;
 
+        // basic info
         activityCard.innerHTML = `
           <h4>${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
         `;
+
+        // participants title
+        const participantsTitle = document.createElement("h5");
+        participantsTitle.className = "participants-title";
+        participantsTitle.textContent = "Participants";
+
+        // participants container (either a ul list or an empty message)
+        const participantsContainer = document.createElement("div");
+        if (details.participants && details.participants.length > 0) {
+          const ul = document.createElement("ul");
+          ul.className = "participants-list";
+          details.participants.forEach((p) => {
+            const li = document.createElement("li");
+            li.className = "participant-item";
+            li.textContent = p;
+            ul.appendChild(li);
+          });
+          participantsContainer.appendChild(ul);
+        } else {
+          const p = document.createElement("p");
+          p.className = "no-participants";
+          p.textContent = "No participants yet — be the first!";
+          participantsContainer.appendChild(p);
+        }
+
+        activityCard.appendChild(participantsTitle);
+        activityCard.appendChild(participantsContainer);
 
         activitiesList.appendChild(activityCard);
 
